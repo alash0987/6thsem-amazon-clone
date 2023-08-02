@@ -1,5 +1,5 @@
 import 'package:amazonclone/constants/global_variable.dart';
-import 'package:amazonclone/features/admin/provider/product_provider.dart';
+import 'package:amazonclone/provider/product_provider.dart';
 import 'package:amazonclone/features/auth/provider/login_signup_provider.dart';
 import 'package:amazonclone/features/auth/services/auth_service.dart';
 import 'package:amazonclone/features/splashscreen/splash_screen.dart';

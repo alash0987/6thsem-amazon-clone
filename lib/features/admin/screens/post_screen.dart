@@ -1,6 +1,9 @@
+import 'package:amazonclone/constants/utils.dart';
 import 'package:amazonclone/features/account/widgets/single_product.dart';
-import 'package:amazonclone/features/admin/provider/product_provider.dart';
+import 'package:amazonclone/provider/product_provider.dart';
 import 'package:amazonclone/features/admin/screens/add_product_screen.dart';
+import 'package:amazonclone/features/admin/services/admin_services.dart';
+import 'package:amazonclone/models/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -38,7 +41,9 @@ class PostScreen extends StatelessWidget {
                           ),
                         ),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            deleteProduct(context, productData, index);
+                          },
                           icon: const Icon(Icons.delete_outline),
                         ),
                       ],
@@ -56,4 +61,14 @@ class PostScreen extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
+}
+
+void deleteProduct(BuildContext context, Product product, int index) {
+  AdminServices adminServices = AdminServices();
+  adminServices.deleteProduct(
+      context: context,
+      product: product,
+      onSuccess: () {
+        showSnackbar(context: context, message: 'Product deleted successfully');
+      });
 }

@@ -2,6 +2,8 @@ import 'package:amazonclone/features/splashscreen/splash_services.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
+  static const routeName = '/splash-screen';
+
   const SplashScreen({super.key});
 
   @override

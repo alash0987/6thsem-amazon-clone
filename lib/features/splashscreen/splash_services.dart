@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:async';
-import 'package:amazonclone/features/admin/provider/product_provider.dart';
+import 'package:amazonclone/provider/product_provider.dart';
 import 'package:amazonclone/features/admin/screens/admin_screen.dart';
 import 'package:amazonclone/features/admin/services/admin_services.dart';
 import 'package:amazonclone/features/auth/screen/auth_screen.dart';
