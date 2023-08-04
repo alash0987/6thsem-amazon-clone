@@ -4,6 +4,7 @@ import 'package:amazonclone/constants/global_variable.dart';
 import 'package:amazonclone/features/account/screens/account_screen.dart';
 import 'package:amazonclone/features/home/screen/home_screen.dart';
 import 'package:amazonclone/provider/buttom_bar_provider.dart';
+import 'package:amazonclone/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,6 +22,7 @@ class ButtomBar extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
+    final userCartLength = context.watch<UserProvider>().user.cart.length;
     return Consumer<ButtomBarProvider>(
         builder: (context, buttomProvider, child) {
       return Scaffold(
@@ -89,9 +91,9 @@ class ButtomBar extends StatelessWidget {
                             minWidth: 16,
                             minHeight: 16,
                           ),
-                          child: const Text(
-                            '0',
-                            style: TextStyle(
+                          child: Text(
+                            userCartLength.toString(),
+                            style:const TextStyle(
                               color: Colors.white,
                               fontSize: 12,
                             ),

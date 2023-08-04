@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 class User {
@@ -8,6 +9,7 @@ class User {
   final String type;
   final String token;
   final String address;
+  final List<dynamic> cart;
   User({
     required this.id,
     required this.name,
@@ -16,6 +18,7 @@ class User {
     required this.type,
     required this.token,
     this.address = '',
+    required this.cart,
   });
 
   //  Create json serialization
@@ -27,6 +30,7 @@ class User {
         "type": type,
         "token": token,
         "address": address,
+        'cart': cart,
       };
   // Create from Map serialization
   factory User.fromMap(Map<String, dynamic> map) => User(
@@ -37,8 +41,32 @@ class User {
         type: map["type"],
         token: map["token"],
         address: map["address"],
+        cart: List<Map<String, dynamic>>.from(
+            map['cart']?.map((x) => Map<String, dynamic>.from(x))),
       );
 
   String toJson() => json.encode(toMap());
   factory User.fromJson(String source) => User.fromMap(json.decode(source));
+
+  User copyWith({
+    String? id,
+    String? name,
+    String? email,
+    String? password,
+    String? type,
+    String? token,
+    String? address,
+    List<dynamic>? cart,
+  }) {
+    return User(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      email: email ?? this.email,
+      password: password ?? this.password,
+      type: type ?? this.type,
+      token: token ?? this.token,
+      address: address ?? this.address,
+      cart: cart ?? this.cart,
+    );
+  }
 }

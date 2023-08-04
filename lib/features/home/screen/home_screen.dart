@@ -97,16 +97,16 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            AddressBox(),
-            SizedBox(
+            const AddressBox(),
+            const SizedBox(
               height: 10,
             ),
-            TopCategories(),
-            SizedBox(
+            const TopCategories(),
+            const SizedBox(
               height: 10,
             ),
-            CarouselImage(),
-            SizedBox(
+            const CarouselImage(),
+            const SizedBox(
               height: 10,
             ),
             DealOfDay(),

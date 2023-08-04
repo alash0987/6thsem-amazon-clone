@@ -6,7 +6,6 @@ import 'package:amazonclone/constants/error_handling.dart';
 import 'package:amazonclone/constants/global_variable.dart';
 import 'package:amazonclone/constants/utils.dart';
 import 'package:amazonclone/features/home/provider/deal_of_day_provider.dart';
-import 'package:amazonclone/features/home/widgets/deal_of_day.dart';
 import 'package:amazonclone/models/product_model.dart';
 import 'package:amazonclone/provider/product_provider.dart';
 import 'package:amazonclone/provider/user_provider.dart';

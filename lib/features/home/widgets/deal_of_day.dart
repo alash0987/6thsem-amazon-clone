@@ -1,7 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:amazonclone/features/home/provider/deal_of_day_provider.dart';
 import 'package:amazonclone/features/home/services/home_services.dart';
+import 'package:amazonclone/features/product_details/provider/rating_provider.dart';
 import 'package:amazonclone/features/product_details/screen/product_details_screen.dart';
 import 'package:amazonclone/models/product_model.dart';
+import 'package:amazonclone/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +24,10 @@ class DealOfDay extends StatelessWidget {
         : dealOfDavProvider.dealOfDay!.name.isEmpty
             ? const SizedBox()
             : GestureDetector(
-                onTap: () {
+                onTap: () async {
+                  //  I want to update the rating here as well
+                  await updateRatings(context, dealOfDavProvider.dealOfDay!);
+
                   Navigator.pushNamed(context, ProductDetailsScreen.routeName,
                       arguments: dealOfDavProvider.dealOfDay);
                 },
@@ -88,3 +95,21 @@ class DealOfDay extends StatelessWidget {
 //   HomeServices homeServices = HomeServices();
 //   homeServices.fetchDealOfDay(context: context);
 // }
+updateRatings(BuildContext context, Product product) {
+  var ratingProvider = Provider.of<RatingProvider>(context, listen: false);
+  var myRating = ratingProvider.myRating;
+  var avgRating = ratingProvider.avgRating;
+  var totalRating = ratingProvider.totalRating;
+  for (int i = 0; i < product.rating!.length; i++) {
+    totalRating += product.rating![i].rating;
+    if (product.rating![i].userId ==
+        Provider.of<UserProvider>(context, listen: false).user.id) {
+      myRating = product.rating![i].rating;
+      ratingProvider.updateMyRating(myRating);
+    }
+  }
+  if (totalRating != 0) {
+    avgRating = totalRating / product.rating!.length;
+    ratingProvider.updateAvgRating(avgRating);
+  }
+}

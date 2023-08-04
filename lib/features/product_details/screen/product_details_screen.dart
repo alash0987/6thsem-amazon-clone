@@ -20,8 +20,13 @@ class ProductDetailsScreen extends StatelessWidget {
   final TextEditingController _searchController = TextEditingController();
   ProductDetailsScreen({super.key, required this.product});
   ProductDetailsServices productDetailsServices = ProductDetailsServices();
+  addToCart(BuildContext context) {
+    productDetailsServices.addToCart(context: context, product: product);
+  }
+
   @override
   Widget build(BuildContext context) {
+    // addToCart(context);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
@@ -183,7 +188,9 @@ class ProductDetailsScreen extends StatelessWidget {
               ),
               child: CustomButton(
                   text: 'Add to Cart',
-                  onPressed: () {},
+                  onPressed: () {
+                    addToCart(context);
+                  },
                   color: const Color.fromRGBO(254, 216, 19, 1)),
             ),
             const SizedBox(

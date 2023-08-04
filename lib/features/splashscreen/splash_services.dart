@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:async';
+import 'package:amazonclone/constants/button_bar.dart';
 import 'package:amazonclone/provider/product_provider.dart';
 import 'package:amazonclone/features/admin/screens/admin_screen.dart';
 import 'package:amazonclone/features/admin/services/admin_services.dart';
@@ -27,9 +28,8 @@ class SplashServices {
       Timer(const Duration(seconds: 3),
           () => Navigator.pushReplacementNamed(context, AdminScreen.routeName));
     } else if (isLogin.isNotEmpty && user.type == 'user') {
-      
       Timer(const Duration(seconds: 3), () {
-        Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+        Navigator.pushReplacementNamed(context, ButtomBar.routeName);
       });
     } else {
       Timer(const Duration(seconds: 3),
