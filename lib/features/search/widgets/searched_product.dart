@@ -52,7 +52,7 @@ class _SearchedProductState extends State<SearchedProduct> {
           child: Row(
             children: [
               Image.network(widget.product.images[0],
-                  fit: BoxFit.fitWidth, height: 135, width: 135),
+                  fit: BoxFit.contain, height: 135, width: 135),
               Column(
                 children: [
                   Container(

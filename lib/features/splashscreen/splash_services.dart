@@ -27,6 +27,7 @@ class SplashServices {
       Timer(const Duration(seconds: 3),
           () => Navigator.pushReplacementNamed(context, AdminScreen.routeName));
     } else if (isLogin.isNotEmpty && user.type == 'user') {
+      
       Timer(const Duration(seconds: 3), () {
         Navigator.pushReplacementNamed(context, HomeScreen.routeName);
       });
