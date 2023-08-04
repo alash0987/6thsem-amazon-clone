@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 import 'dart:convert';
-import 'dart:ffi';
 import 'dart:io';
 import 'package:amazonclone/constants/error_handling.dart';
 import 'package:amazonclone/constants/global_variable.dart';

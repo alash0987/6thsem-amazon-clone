@@ -1,4 +1,6 @@
 import 'package:amazonclone/constants/global_variable.dart';
+import 'package:amazonclone/features/product_details/provider/rating_provider.dart';
+import 'package:amazonclone/features/search/provider/search_product_provider.dart';
 import 'package:amazonclone/provider/product_provider.dart';
 import 'package:amazonclone/features/auth/provider/login_signup_provider.dart';
 import 'package:amazonclone/features/auth/services/auth_service.dart';
@@ -25,7 +27,13 @@ void main() async {
       ),
       ChangeNotifierProvider<ProductProvider>(
         create: (_) => ProductProvider(),
-      )
+      ),
+      ChangeNotifierProvider<SearchProductProvider>(
+        create: (_) => SearchProductProvider(),
+      ),
+      ChangeNotifierProvider<RatingProvider>(
+        create: (_) => RatingProvider(),
+      ),
     ],
     child: MultiProvider(
       providers: [ChangeNotifierProvider(create: (context) => UserProvider())],

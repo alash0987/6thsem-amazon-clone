@@ -1,29 +1,21 @@
-// ignore_for_file: use_build_context_synchronously, prefer_final_fields
-
 import 'package:amazonclone/constants/global_variable.dart';
-import 'package:amazonclone/features/auth/services/auth_service.dart';
 import 'package:amazonclone/features/home/widgets/address_box.dart';
-import 'package:amazonclone/features/home/widgets/carousell_image.dart';
-import 'package:amazonclone/features/home/widgets/deal_of_day.dart';
-import 'package:amazonclone/features/home/widgets/top_categories.dart';
-import 'package:amazonclone/features/search/screens/search_screen.dart';
+import 'package:amazonclone/features/product_details/screen/product_details_screen.dart';
+import 'package:amazonclone/features/search/provider/search_product_provider.dart';
 import 'package:amazonclone/features/search/services/search_services.dart';
+import 'package:amazonclone/features/search/widgets/searched_product.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-// ignore: must_be_immutable
-class HomeScreen extends StatelessWidget {
-  static const routeName = '/home_screen';
-  HomeScreen({
-    super.key,
-  });
-
-  AuthService authService = AuthService();
-  TextEditingController _searchController = TextEditingController();
+class SearchScreen extends StatelessWidget {
+  final TextEditingController _searchController = TextEditingController();
+  static const String routeName = '/search-screen';
+  final String searchQuery;
+  SearchScreen({super.key, required this.searchQuery});
 
   @override
   Widget build(BuildContext context) {
-    //
-
+    var products = context.watch<SearchProductProvider>().searchProduct;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
@@ -45,7 +37,6 @@ class HomeScreen extends StatelessWidget {
                       child: TextFormField(
                         controller: _searchController,
                         onFieldSubmitted: (value) {
-                          // await updateRating(context, products);
                           navigateToSearchScreen(context, value);
                         },
                         decoration: InputDecoration(
@@ -94,25 +85,32 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: const SingleChildScrollView(
-        child: Column(
-          children: [
-            AddressBox(),
-            SizedBox(
-              height: 10,
+      body: products.isEmpty
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : Column(
+              children: [
+                const AddressBox(),
+                const SizedBox(
+                  height: 10,
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: products.length,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, ProductDetailsScreen.routeName,
+                                arguments: products[index]);
+                          },
+                          child: SearchedProduct(product: products[index]));
+                    },
+                  ),
+                ),
+              ],
             ),
-            TopCategories(),
-            SizedBox(
-              height: 10,
-            ),
-            CarouselImage(),
-            SizedBox(
-              height: 10,
-            ),
-            DealOfDay(),
-          ],
-        ),
-      ),
     );
   }
 }
@@ -123,6 +121,9 @@ navigateToSearchScreen(BuildContext context, String query) async {
 }
 
 fetchSearchProduct(BuildContext context, String query) async {
+  var searchProduct =
+      Provider.of<SearchProductProvider>(context, listen: false).searchProduct;
   final SearchServices searchServices = SearchServices();
-  await searchServices.fetchSearchProduct(context: context, searchQuery: query);
+  searchProduct = await searchServices.fetchSearchProduct(
+      context: context, searchQuery: query);
 }

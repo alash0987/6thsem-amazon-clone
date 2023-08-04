@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:amazonclone/constants/global_variable.dart';
 import 'package:amazonclone/features/home/screen/category_deal_screen.dart';
 import 'package:amazonclone/features/home/services/home_services.dart';
@@ -49,6 +51,7 @@ class TopCategories extends StatelessWidget {
 }
 
 navigateToCategoryDealScreen(BuildContext context, String category) async {
+  // Provider.of<ProductProvider>(context, listen: false).categoryProducts;
   await HomeServices()
       .fetchCategoryProducts(context: context, category: category);
   Navigator.pushNamed(context, CategoryDealScreen.routeName,
