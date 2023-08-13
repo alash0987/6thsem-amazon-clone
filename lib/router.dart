@@ -1,7 +1,9 @@
 import 'package:amazonclone/constants/button_bar.dart';
+import 'package:amazonclone/features/address/screens/address_screen.dart';
 import 'package:amazonclone/features/admin/screens/add_product_screen.dart';
 import 'package:amazonclone/features/admin/screens/admin_screen.dart';
 import 'package:amazonclone/features/auth/screen/auth_screen.dart';
+import 'package:amazonclone/features/cart/screens/cart_screen.dart';
 import 'package:amazonclone/features/home/screen/category_deal_screen.dart';
 import 'package:amazonclone/features/home/screen/home_screen.dart';
 import 'package:amazonclone/features/product_details/screen/product_details_screen.dart';
@@ -14,13 +16,23 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
   switch (routeSettings.name) {
     case AuthScreen.routeName:
       return MaterialPageRoute(
-          settings: routeSettings, builder: (_) => AuthScreen());
+        settings: routeSettings,
+        builder: (_) => AuthScreen(),
+      );
+    case AddressScreen.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => AddressScreen(),
+      );
     case HomeScreen.routeName:
       return MaterialPageRoute(
           settings: routeSettings, builder: (_) => HomeScreen());
     case ButtomBar.routeName:
       return MaterialPageRoute(
           settings: routeSettings, builder: (_) => ButtomBar());
+    case CartScreen.routeName:
+      return MaterialPageRoute(
+          settings: routeSettings, builder: (_) => CartScreen());
     case AdminScreen.routeName:
       return MaterialPageRoute(
           settings: routeSettings, builder: (_) => AdminScreen());

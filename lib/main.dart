@@ -1,4 +1,5 @@
 import 'package:amazonclone/constants/global_variable.dart';
+import 'package:amazonclone/features/cart/provider/qty_incr_decr.dart';
 import 'package:amazonclone/features/home/provider/deal_of_day_provider.dart';
 import 'package:amazonclone/features/product_details/provider/rating_provider.dart';
 import 'package:amazonclone/features/search/provider/search_product_provider.dart';
@@ -37,6 +38,9 @@ void main() async {
       ),
       ChangeNotifierProvider<DealOfDayProvider>(
         create: (_) => DealOfDayProvider(),
+      ),
+      ChangeNotifierProvider<quantityIncDec>(
+        create: (_) => quantityIncDec(),
       )
     ],
     child: MultiProvider(

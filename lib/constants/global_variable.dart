@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-String uri = 'http://192.168.1.67:3000';
+String uri = 'http://192.168.1.70:3000';
 
 class GlobalVariable {
   static const String cloudinaryName = 'dahkfbibj';

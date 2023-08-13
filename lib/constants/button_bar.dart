@@ -2,6 +2,7 @@
 
 import 'package:amazonclone/constants/global_variable.dart';
 import 'package:amazonclone/features/account/screens/account_screen.dart';
+import 'package:amazonclone/features/cart/screens/cart_screen.dart';
 import 'package:amazonclone/features/home/screen/home_screen.dart';
 import 'package:amazonclone/provider/buttom_bar_provider.dart';
 import 'package:amazonclone/provider/user_provider.dart';
@@ -13,13 +14,7 @@ class ButtomBar extends StatelessWidget {
   ButtomBar({super.key});
   double bottomNavBarWidth = 42;
   double bottomBarBorderWidth = 5;
-  List<Widget> screen = [
-    HomeScreen(),
-    const AccountScreen(),
-    const Center(
-      child: Text('Cart Screen'),
-    ),
-  ];
+  List<Widget> screen = [HomeScreen(), const AccountScreen(), CartScreen()];
   @override
   Widget build(BuildContext context) {
     final userCartLength = context.watch<UserProvider>().user.cart.length;
@@ -93,7 +88,7 @@ class ButtomBar extends StatelessWidget {
                           ),
                           child: Text(
                             userCartLength.toString(),
-                            style:const TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 12,
                             ),

@@ -27,7 +27,6 @@ class DealOfDay extends StatelessWidget {
                 onTap: () async {
                   //  I want to update the rating here as well
                   await updateRatings(context, dealOfDavProvider.dealOfDay!);
-
                   Navigator.pushNamed(context, ProductDetailsScreen.routeName,
                       arguments: dealOfDavProvider.dealOfDay);
                 },
