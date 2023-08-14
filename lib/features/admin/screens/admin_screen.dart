@@ -15,10 +15,7 @@ class AdminScreen extends StatelessWidget {
   double bottomBarBorderWidth = 5;
   List<Widget> screen = [
     const PostScreen(),
-    // const AnalyticsScreen(),
-    const Center(
-      child: Text('Analytics'),
-    ),
+    const AnalyticsScreen(),
     OrdersScreen(),
   ];
   @override

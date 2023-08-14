@@ -4,6 +4,7 @@ import 'package:amazonclone/common/widgets/custom_button.dart';
 import 'package:amazonclone/common/widgets/custom_textfield.dart';
 import 'package:amazonclone/constants/global_variable.dart';
 import 'package:amazonclone/features/admin/services/admin_services.dart';
+import 'package:amazonclone/features/splashscreen/splash_screen.dart';
 import 'package:amazonclone/provider/dropdown_provider.dart';
 import 'package:amazonclone/provider/pick-Image_provider.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -37,6 +38,7 @@ class AddProductScreen extends StatelessWidget {
               .selectedCategory,
           images:
               Provider.of<PickImageProvider>(context, listen: false).images);
+      Navigator.pushNamed(context, SplashScreen.routeName);
     }
   }
 
@@ -184,6 +186,7 @@ class AddProductScreen extends StatelessWidget {
                           onPressed: () async {
                             debugPrint('Sell Product');
                             await sellProduct(context);
+
                             debugPrint('Sell Product 2');
                           }),
                     ],

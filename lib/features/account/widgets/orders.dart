@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, unnecessary_null_comparison
 
 import 'package:amazonclone/constants/global_variable.dart';
 import 'package:amazonclone/features/account/widgets/single_product.dart';
@@ -17,7 +17,7 @@ class Orders extends StatelessWidget {
   Widget build(BuildContext context) {
     var orders = Provider.of<OrderProvider>(context, listen: false).orders;
     return orders == null
-        ? CircularProgressIndicator()
+        ? const CircularProgressIndicator()
         : Column(
             children: [
               Row(
@@ -49,7 +49,6 @@ class Orders extends StatelessWidget {
                   ),
                 ],
               ),
-              //  Display orders
               Container(
                 height: 170,
                 padding: const EdgeInsets.only(left: 10, top: 20, right: 0),
@@ -65,7 +64,7 @@ class Orders extends StatelessWidget {
                             arguments: orders[index]);
                       },
                       child: SingleProduct(
-                          image: orders![index].products[0].images[0]),
+                          image: orders[index].products[0].images[0]),
                     );
                   },
                 ),
