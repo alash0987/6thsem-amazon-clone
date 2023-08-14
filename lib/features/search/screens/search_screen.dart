@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable, use_build_context_synchronously
+
 import 'package:amazonclone/constants/global_variable.dart';
 import 'package:amazonclone/features/home/widgets/address_box.dart';
 import 'package:amazonclone/features/product_details/screen/product_details_screen.dart';

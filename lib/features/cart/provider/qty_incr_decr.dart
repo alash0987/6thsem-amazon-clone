@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class quantityIncDec with ChangeNotifier {
+class QuantityIncreaseDecrease with ChangeNotifier {
   int _quantity = 1;
   int get quantity => _quantity;
 

@@ -18,7 +18,6 @@ void httpErrorHandle({
           context: context, message: jsonDecode(response.body)['message']);
       break;
     case 500:
-      print(jsonDecode(response.body)['message']);
       showSnackbar(
           context: context, message: jsonDecode(response.body)['message']);
       break;

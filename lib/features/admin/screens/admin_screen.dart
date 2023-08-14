@@ -1,6 +1,8 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:amazonclone/constants/global_variable.dart';
+import 'package:amazonclone/features/admin/screens/analytics_screen.dart';
+import 'package:amazonclone/features/admin/screens/order_screen.dart';
 import 'package:amazonclone/features/admin/screens/post_screen.dart';
 import 'package:amazonclone/provider/buttom_bar_provider.dart';
 import 'package:flutter/material.dart';
@@ -11,14 +13,13 @@ class AdminScreen extends StatelessWidget {
   AdminScreen({super.key});
   double bottomNavBarWidth = 42;
   double bottomBarBorderWidth = 5;
-  List<Widget> screen = const [
-    PostScreen(),
-    Center(
-      child: Text('Analytics page'),
+  List<Widget> screen = [
+    const PostScreen(),
+    // const AnalyticsScreen(),
+    const Center(
+      child: Text('Analytics'),
     ),
-    Center(
-      child: Text('Cart page'),
-    ),
+    OrdersScreen(),
   ];
   @override
   Widget build(BuildContext context) {

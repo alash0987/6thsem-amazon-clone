@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:amazonclone/common/widgets/custom_button.dart';
 import 'package:amazonclone/constants/global_variable.dart';
 import 'package:amazonclone/features/address/screens/address_screen.dart';
@@ -18,6 +20,10 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = context.watch<UserProvider>().user;
+    int sum = 0;
+    user.cart
+        .map((e) => sum += e['quantity'] * e['product']['price'] as int)
+        .toList();
 
     return Scaffold(
       appBar: PreferredSize(
@@ -98,7 +104,7 @@ class CartScreen extends StatelessWidget {
               padding: const EdgeInsets.all(8),
               child: CustomButton(
                 text: 'Proceed to buy ${user.cart.length} item',
-                onPressed: () => navigateToAddress(context),
+                onPressed: () => navigateToAddress(context, sum),
                 color: Colors.yellow[600],
               ),
             ),
@@ -132,6 +138,7 @@ fetchSearchProduct(BuildContext context, String query) async {
   await searchServices.fetchSearchProduct(context: context, searchQuery: query);
 }
 
-navigateToAddress(BuildContext context) {
-  Navigator.pushNamed(context, AddressScreen.routeName);
+navigateToAddress(BuildContext context, int sum) {
+  Navigator.pushNamed(context, AddressScreen.routeName,
+      arguments: sum.toString());
 }

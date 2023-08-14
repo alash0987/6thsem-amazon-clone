@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, must_be_immutable
 
 import 'package:amazonclone/features/home/provider/deal_of_day_provider.dart';
 import 'package:amazonclone/features/home/services/home_services.dart';

@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:amazonclone/common/widgets/stars.dart';
 import 'package:amazonclone/features/product_details/provider/rating_provider.dart';
 import 'package:amazonclone/models/product_model.dart';
@@ -35,7 +37,6 @@ class _SearchedProductState extends State<SearchedProduct> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     updateRating(context);
   }

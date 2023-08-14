@@ -1,8 +1,11 @@
 import 'package:amazonclone/constants/global_variable.dart';
+import 'package:amazonclone/features/admin/provider/order_provider.dart';
 import 'package:amazonclone/features/cart/provider/qty_incr_decr.dart';
 import 'package:amazonclone/features/home/provider/deal_of_day_provider.dart';
+import 'package:amazonclone/features/order_details/provider/stepper_provider.dart';
 import 'package:amazonclone/features/product_details/provider/rating_provider.dart';
 import 'package:amazonclone/features/search/provider/search_product_provider.dart';
+import 'package:amazonclone/provider/order_provider.dart';
 import 'package:amazonclone/provider/product_provider.dart';
 import 'package:amazonclone/features/auth/provider/login_signup_provider.dart';
 import 'package:amazonclone/features/auth/services/auth_service.dart';
@@ -39,14 +42,21 @@ void main() async {
       ChangeNotifierProvider<DealOfDayProvider>(
         create: (_) => DealOfDayProvider(),
       ),
-      ChangeNotifierProvider<quantityIncDec>(
-        create: (_) => quantityIncDec(),
-      )
+      ChangeNotifierProvider<OrderProvider>(
+        create: (_) => OrderProvider(),
+      ),
+      ChangeNotifierProvider<QuantityIncreaseDecrease>(
+        create: (_) => QuantityIncreaseDecrease(),
+      ),
+      ChangeNotifierProvider<StepperProvider>(
+        create: (_) => StepperProvider(),
+      ),
+      ChangeNotifierProvider<OrderProviderAdmin>(
+        create: (_) => OrderProviderAdmin(),
+      ),
+      ChangeNotifierProvider(create: (context) => UserProvider())
     ],
-    child: MultiProvider(
-      providers: [ChangeNotifierProvider(create: (context) => UserProvider())],
-      child: MainApp(),
-    ),
+    child: MainApp(),
   ));
 }
 
