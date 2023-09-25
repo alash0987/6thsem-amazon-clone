@@ -71,7 +71,7 @@ class HomeScreen extends StatelessWidget {
                           enabledBorder: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(7)),
                           ),
-                          hintText: 'Search Amazon.in',
+                          hintText: 'Search alash.com.np',
                           hintStyle: const TextStyle(
                               color: Colors.black38,
                               fontSize: 17,

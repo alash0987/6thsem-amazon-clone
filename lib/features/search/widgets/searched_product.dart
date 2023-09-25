@@ -97,10 +97,14 @@ class _SearchedProductState extends State<SearchedProduct> {
                   Container(
                     width: 235,
                     padding: const EdgeInsets.only(left: 10, top: 5),
-                    child: const Text(
-                      'In Stock',
+                    child: Text(
+                      widget.product.quantity > 0
+                          ? 'In Stock (${widget.product.quantity.toInt()})'
+                          : 'Out of Stock',
                       maxLines: 2,
-                      style: TextStyle(color: Colors.teal),
+                      style: widget.product.quantity <= 0
+                          ? const TextStyle(color: Colors.teal)
+                          : const TextStyle(color: Colors.teal),
                     ),
                   ),
                 ],

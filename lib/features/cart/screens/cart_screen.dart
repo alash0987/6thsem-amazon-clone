@@ -2,6 +2,7 @@
 
 import 'package:amazonclone/common/widgets/custom_button.dart';
 import 'package:amazonclone/constants/global_variable.dart';
+import 'package:amazonclone/constants/utils.dart';
 import 'package:amazonclone/features/address/screens/address_screen.dart';
 import 'package:amazonclone/features/cart/screens/cart_product.dart';
 import 'package:amazonclone/features/cart/widgets/cart_subtotal.dart';
@@ -72,7 +73,7 @@ class CartScreen extends StatelessWidget {
                           enabledBorder: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(7)),
                           ),
-                          hintText: 'Search Amazon.in',
+                          hintText: 'Search alash.com.np',
                           hintStyle: const TextStyle(
                               color: Colors.black38,
                               fontSize: 17,
@@ -104,8 +105,12 @@ class CartScreen extends StatelessWidget {
               padding: const EdgeInsets.all(8),
               child: CustomButton(
                 text: 'Proceed to buy ${user.cart.length} item',
-                onPressed: () => navigateToAddress(context, sum),
-                color: Colors.yellow[600],
+                onPressed: () {
+                  user.cart.isEmpty
+                      ? showSnackbar(context: context, message: 'Cart is empty')
+                      : navigateToAddress(context, sum);
+                },
+                color: GlobalVariable.secondaryColor,
               ),
             ),
             const SizedBox(

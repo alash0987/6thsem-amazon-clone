@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:amazonclone/common/widgets/custom_textfield.dart';
 import 'package:amazonclone/constants/global_variable.dart';
 import 'package:amazonclone/features/address/services/address_services.dart';

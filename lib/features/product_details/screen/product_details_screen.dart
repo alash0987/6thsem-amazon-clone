@@ -3,6 +3,9 @@
 import 'package:amazonclone/common/widgets/custom_button.dart';
 import 'package:amazonclone/common/widgets/stars.dart';
 import 'package:amazonclone/constants/global_variable.dart';
+import 'package:amazonclone/constants/utils.dart';
+import 'package:amazonclone/features/address/screens/address_screen.dart';
+import 'package:amazonclone/features/cart/screens/cart_screen.dart';
 import 'package:amazonclone/features/product_details/provider/rating_provider.dart';
 import 'package:amazonclone/features/product_details/services/product_details_services.dart';
 import 'package:amazonclone/features/search/provider/search_product_provider.dart';
@@ -73,7 +76,7 @@ class ProductDetailsScreen extends StatelessWidget {
                           enabledBorder: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(7)),
                           ),
-                          hintText: 'Search Amazon.in',
+                          hintText: 'Search alash.com.np',
                           hintStyle: const TextStyle(
                               color: Colors.black38,
                               fontSize: 17,
@@ -177,7 +180,12 @@ class ProductDetailsScreen extends StatelessWidget {
               padding: const EdgeInsets.all(
                 10,
               ),
-              child: CustomButton(text: 'Buy Now', onPressed: () {}),
+              child: CustomButton(
+                  text: 'Buy Now',
+                  onPressed: () {
+                    Navigator.pushNamed(context, AddressScreen.routeName,
+                        arguments: product.price.toString());
+                  }),
             ),
             const SizedBox(
               height: 10,
@@ -189,9 +197,12 @@ class ProductDetailsScreen extends StatelessWidget {
               child: CustomButton(
                   text: 'Add to Cart',
                   onPressed: () {
+                    showSnackbar(context: context, message: 'Added to cart');
+                    Navigator.pushNamed(context, CartScreen.routeName,
+                        arguments: product.price.toString());
                     addToCart(context);
                   },
-                  color: const Color.fromRGBO(254, 216, 19, 1)),
+                  color: Colors.red),
             ),
             const SizedBox(
               height: 10,
@@ -221,7 +232,7 @@ class ProductDetailsScreen extends StatelessWidget {
               itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
               itemBuilder: (context, _) => const Icon(
                 Icons.star,
-                color: GlobalVariable.secondaryColor,
+                color: Colors.red,
               ),
               onRatingUpdate: (rating) {
                 productDetailsServices.rateProduct(

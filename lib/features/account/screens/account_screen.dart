@@ -18,17 +18,17 @@ class AccountScreen extends StatelessWidget {
                 const BoxDecoration(gradient: GlobalVariable.appBarGradient),
           ),
           title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Container(
-                alignment: Alignment.topLeft,
-                child: Image.asset(
-                  'assets/images/amazon_in.png',
-                  width: 120,
-                  height: 45,
-                  color: Colors.black,
-                ),
-              ),
+              // Container(
+              //   alignment: Alignment.topLeft,
+              //   child: Image.asset(
+              //     'assets/images/college_logo.png',
+              //     width: 150,
+              //     height: 45,
+              //     // color: Colors.black,
+              //   ),
+              // ),
               Container(
                 padding: const EdgeInsets.only(left: 15, right: 15),
                 child: const Row(

@@ -7,6 +7,8 @@ import 'package:amazonclone/features/search/provider/search_product_provider.dar
 import 'package:amazonclone/features/search/services/search_services.dart';
 import 'package:amazonclone/features/search/widgets/searched_product.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/physics.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 
 class SearchScreen extends StatelessWidget {
@@ -64,7 +66,7 @@ class SearchScreen extends StatelessWidget {
                           enabledBorder: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(7)),
                           ),
-                          hintText: 'Search Amazon.in',
+                          hintText: 'Search alash.com.np',
                           hintStyle: const TextStyle(
                               color: Colors.black38,
                               fontSize: 17,
@@ -88,8 +90,29 @@ class SearchScreen extends StatelessWidget {
         ),
       ),
       body: products.isEmpty
-          ? const Center(
-              child: CircularProgressIndicator(),
+          ? Center(
+              child: Animate(
+                effects: const [
+                  ShakeEffect(
+                    duration: Duration(milliseconds: 1000),
+                    curve: Curves.bounceInOut,
+                  ),
+                  FlipEffect(
+                    duration: Duration(milliseconds: 1000),
+                    curve: Curves.bounceInOut,
+                  ),
+                  ScaleEffect(
+                    duration: Duration(milliseconds: 1000),
+                    curve: Curves.bounceInOut,
+                  ),
+                ],
+                autoPlay: true,
+                child: SizedBox(
+                  height: 500,
+                  width: 500,
+                  child: Image.asset('assets/images/nproduct.png'),
+                ),
+              ),
             )
           : Column(
               children: [

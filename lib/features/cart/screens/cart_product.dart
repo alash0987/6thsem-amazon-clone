@@ -69,10 +69,16 @@ class CartProduct extends StatelessWidget {
                   Container(
                     width: 235,
                     padding: const EdgeInsets.only(left: 10, top: 5),
-                    child: const Text(
-                      'In Stock',
+                    child: Text(
+                      product.quantity > 0
+                          ? 'In Stock (${product.quantity.toInt()})'
+                          : 'Out of Stock',
                       maxLines: 2,
-                      style: TextStyle(color: Colors.teal),
+                      style: TextStyle(
+                          color:
+                              product.quantity > 0 ? Colors.teal : Colors.red,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500),
                     ),
                   ),
                 ],

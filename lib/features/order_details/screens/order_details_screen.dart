@@ -2,6 +2,7 @@ import 'package:amazonclone/common/widgets/custom_button.dart';
 import 'package:amazonclone/constants/global_variable.dart';
 import 'package:amazonclone/features/admin/services/admin_services.dart';
 import 'package:amazonclone/features/search/screens/search_screen.dart';
+import 'package:amazonclone/features/splashscreen/splash_screen.dart';
 import 'package:amazonclone/models/order.dart';
 import 'package:amazonclone/provider/user_provider.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
   @override
   void initState() {
     super.initState();
-    currentStep = widget.order.status;
+    currentStep = (widget.order.status).clamp(0, 4);
   }
 
   // !!! ONLY FOR ADMIN!!!
@@ -43,6 +44,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
       onSuccess: () {
         setState(() {
           currentStep += 1;
+          print(currentStep);
         });
       },
     );
@@ -105,7 +107,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                             width: 1,
                           ),
                         ),
-                        hintText: 'Search Amazon.in',
+                        hintText: 'Search Lumbini.com',
                         hintStyle: const TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 17,
@@ -222,60 +224,93 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                     color: Colors.black12,
                   ),
                 ),
-                child: Stepper(
-                  currentStep: currentStep,
-                  controlsBuilder: (context, details) {
-                    if (user.type == 'admin') {
-                      return CustomButton(
-                        text: 'Done',
-                        onPressed: () => changeOrderStatus(details.currentStep),
-                      );
-                    }
-                    return const SizedBox();
-                  },
-                  steps: [
-                    Step(
-                      title: const Text('Pending'),
-                      content: const Text(
-                        'Your order is yet to be delivered',
-                      ),
-                      isActive: currentStep > 0,
-                      state: currentStep > 0
-                          ? StepState.complete
-                          : StepState.indexed,
-                    ),
-                    Step(
-                      title: const Text('Completed'),
-                      content: const Text(
-                        'Your order has been delivered, you are yet to sign.',
-                      ),
-                      isActive: currentStep > 1,
-                      state: currentStep > 1
-                          ? StepState.complete
-                          : StepState.indexed,
-                    ),
-                    Step(
-                      title: const Text('Received'),
-                      content: const Text(
-                        'Your order has been delivered and signed by you.',
-                      ),
-                      isActive: currentStep > 2,
-                      state: currentStep > 2
-                          ? StepState.complete
-                          : StepState.indexed,
-                    ),
-                    Step(
-                      title: const Text('Delivered'),
-                      content: const Text(
-                        'Your order has been delivered and signed by you!',
-                      ),
-                      isActive: currentStep >= 3,
-                      state: currentStep >= 3
-                          ? StepState.complete
-                          : StepState.indexed,
-                    ),
-                  ],
-                ),
+                child: widget.order.status <= 4 && currentStep <= 4
+                    ? Stepper(
+                        currentStep: currentStep,
+                        controlsBuilder: (context, details) {
+                          if (user.type == 'admin') {
+                            return widget.order.status <= 4
+                                ? CustomButton(
+                                    text: 'Done',
+                                    onPressed: () =>
+                                        changeOrderStatus(details.currentStep),
+                                  )
+                                : CustomButton(
+                                    text: 'For Error Handling',
+                                    onPressed: () {
+                                      debugPrint('For Error Handling');
+                                    });
+                          }
+                          return const SizedBox();
+                        },
+                        onStepContinue: () {
+                          if (user.type == 'admin') {
+                            changeOrderStatus(currentStep);
+                          }
+                        },
+                        onStepCancel: () {
+                          if (user.type == 'admin') {
+                            setState(() {
+                              currentStep -= 1;
+                            });
+                          }
+                        },
+                        steps: [
+                          Step(
+                            title: const Text('Pending'),
+                            content: const Text(
+                              'Your order is pending.',
+                            ),
+                            isActive: currentStep > 0,
+                            state: currentStep > 0
+                                ? StepState.complete
+                                : StepState.indexed,
+                          ),
+                          Step(
+                            title: const Text('Completed'),
+                            content: const Text(
+                              ' Your order has been completed and is ready to be shipped. ',
+                            ),
+                            isActive: currentStep > 1,
+                            state: currentStep > 1
+                                ? StepState.complete
+                                : StepState.indexed,
+                          ),
+                          Step(
+                            title: const Text('One the way'),
+                            content: const Text(
+                              '   Your order is on the way. ',
+                            ),
+                            isActive: currentStep > 2,
+                            state: currentStep > 2
+                                ? StepState.complete
+                                : StepState.indexed,
+                          ),
+                          Step(
+                            title: const Text('Delivered'),
+                            content: const Text(
+                              ' Your order has been delivered and signed by you.',
+                            ),
+                            isActive: currentStep >= 4,
+                            state: currentStep >= 4
+                                ? StepState.complete
+                                : StepState.indexed,
+                          ),
+                          //  For Error Handling
+                          Step(
+                            title: const Text('Hey there'),
+                            content: const Text(
+                              ' This does nothing .',
+                            ),
+                            isActive: currentStep >= 4,
+                            state: currentStep >= 4
+                                ? StepState.complete
+                                : StepState.indexed,
+                          ),
+                        ],
+                      )
+                    : Text(
+                        'Order Delivered and Signed by ${user.type == 'admin' ? 'Admin' : 'You'}  already'),
               ),
             ],
           ),

@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 
 import 'package:amazonclone/constants/error_handling.dart';
@@ -17,6 +19,7 @@ class AddressServices {
   }) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
 
+    // ignore: duplicate_ignore
     try {
       http.Response res = await http.post(
         Uri.parse('$uri/api/save-user-address'),

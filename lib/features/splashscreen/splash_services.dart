@@ -18,7 +18,7 @@ class SplashServices {
   AuthService authService = AuthService();
   AccountServices accountServices = AccountServices();
   isLogin(BuildContext context) async {
-    // await adminServices.fetchAllOrders(context);
+    await adminServices.fetchAllOrders(context);
     await authService.getUserData(context);
     await accountServices.fetchMyOrders(context: context);
 

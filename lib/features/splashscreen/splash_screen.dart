@@ -14,16 +14,20 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-
-    SplashServices splashServices = SplashServices();
-    splashServices.isLogin(context);
+    loadEveryting();
   }
+
+  void loadEveryting() async {
+    await SplashServices().isLogin(context);
+  }
+  //
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-        body: Center(
-      child: CircularProgressIndicator(),
-    ));
+      body: Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
   }
 }

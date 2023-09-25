@@ -12,8 +12,8 @@ class AddressBox extends StatelessWidget {
       height: 40,
       decoration: const BoxDecoration(
         gradient: LinearGradient(colors: [
-          Color.fromARGB(255, 114, 226, 221),
-          Color.fromARGB(255, 162, 236, 233),
+          Color.fromARGB(255, 208, 145, 9),
+          Color.fromARGB(255, 208, 145, 9),
         ], stops: [
           0.5,
           1.0
@@ -30,7 +30,8 @@ class AddressBox extends StatelessWidget {
                 'Delivery to ${user.name}- ${user.address}',
                 style: const TextStyle(
                     fontWeight: FontWeight.w500,
-                    overflow: TextOverflow.ellipsis),
+                    overflow: TextOverflow.ellipsis,
+                    color: Colors.black),
               ),
             ),
           ),

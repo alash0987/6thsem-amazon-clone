@@ -9,7 +9,6 @@ import 'package:amazonclone/features/admin/provider/order_provider.dart';
 import 'package:amazonclone/features/splashscreen/splash_screen.dart';
 import 'package:amazonclone/models/order.dart';
 import 'package:amazonclone/models/product_model.dart';
-import 'package:amazonclone/provider/order_provider.dart';
 import 'package:amazonclone/provider/user_provider.dart';
 // import 'package:cloudinary/cloudinary.dart';
 import 'package:cloudinary_public/cloudinary_public.dart';
@@ -206,6 +205,20 @@ class AdminServices {
       // showSnackBar(context, e.toString());
       showSnackbar(context: context, message: e.toString());
     }
+  }
+
+  //  get status of order
+  Future<String> getStatus() async {
+    try {
+      http.Response res =
+          await http.get(Uri.parse('$uri/admin/get-current-order-status'));
+      if (res.statusCode == 200) {
+        return res.body;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+    return '0';
   }
 
   Future<Map<String, dynamic>> getEarnings(BuildContext context) async {

@@ -1,4 +1,6 @@
 import 'dart:io';
+
+import 'package:amazonclone/constants/global_variable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +11,17 @@ void showSnackbar({
 }) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
-      content: Text(message),
+      content: Center(child: Text(message)),
+      duration: const Duration(seconds: 3),
+      backgroundColor: appPrimaryColor,
+      animation: CurvedAnimation(
+        parent: AnimationController(
+          vsync: ScaffoldMessenger.of(context),
+          duration: const Duration(milliseconds: 300),
+        ),
+        curve: Curves.easeInOutCubicEmphasized,
+        reverseCurve: Curves.easeOut,
+      ),
     ),
   );
 }

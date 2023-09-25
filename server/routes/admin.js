@@ -60,6 +60,21 @@ adminRouter.post('/admin/add-product',admin, async (req, res) => {
           res.status(500).json({ error: e.message });
         }
       });
+      //  get current Statues of order
+      adminRouter.get('/admin/get-current-order-status',admin, async (req, res) => {
+        try{
+            // const products=await Product.find({});
+            const orders=await Order.find({});
+
+            res.json(orders.status);
+
+        }catch(err){
+            res.status(500).json({ error: err.message });
+        }
+    },);
+      
+  
+
       adminRouter.get("/admin/analytics", admin, async (req, res) => {
         try {
           const orders = await Order.find({});

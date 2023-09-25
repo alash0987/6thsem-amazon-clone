@@ -1,5 +1,3 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:amazonclone/constants/global_variable.dart';
 import 'package:amazonclone/features/admin/screens/analytics_screen.dart';
 import 'package:amazonclone/features/admin/screens/order_screen.dart';
@@ -8,6 +6,7 @@ import 'package:amazonclone/provider/buttom_bar_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class AdminScreen extends StatelessWidget {
   static const routeName = '/admin_screen';
   AdminScreen({super.key});
@@ -16,7 +15,7 @@ class AdminScreen extends StatelessWidget {
   List<Widget> screen = [
     const PostScreen(),
     const AnalyticsScreen(),
-    OrdersScreen(),
+    const OrdersScreen(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -35,11 +34,12 @@ class AdminScreen extends StatelessWidget {
               children: [
                 Container(
                   alignment: Alignment.topLeft,
-                  child: Image.asset(
-                    'assets/images/amazon_in.png',
-                    width: 120,
-                    height: 45,
-                    color: Colors.black,
+                  child: const Text(
+                    'Alash.com.np',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
                 const Text(

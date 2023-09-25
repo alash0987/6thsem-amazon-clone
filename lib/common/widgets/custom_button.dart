@@ -15,8 +15,8 @@ class CustomButton extends StatelessWidget {
           minimumSize: const Size(double.infinity, 50), backgroundColor: color),
       child: Text(
         text,
-        style: TextStyle(
-          color: color == null ? Colors.white : Colors.black,
+        style: const TextStyle(
+          color: Colors.white,
         ),
       ),
     );

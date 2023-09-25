@@ -1,4 +1,3 @@
-import 'package:amazonclone/constants/global_variable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -12,10 +11,10 @@ class Stars extends StatelessWidget {
       direction: Axis.horizontal,
       itemCount: 5,
       rating: rating,
-      itemSize: 15,
+      itemSize: 18,
       itemBuilder: (context, _) => const Icon(
         Icons.star,
-        color: GlobalVariable.secondaryColor,
+        color: Colors.red,
       ),
     );
   }

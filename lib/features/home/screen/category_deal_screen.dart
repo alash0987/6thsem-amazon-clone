@@ -1,6 +1,10 @@
+import 'package:amazonclone/common/widgets/stars.dart';
 import 'package:amazonclone/constants/global_variable.dart';
+import 'package:amazonclone/constants/utils.dart';
+import 'package:amazonclone/features/cart/screens/cart_screen.dart';
 import 'package:amazonclone/features/product_details/provider/rating_provider.dart';
 import 'package:amazonclone/features/product_details/screen/product_details_screen.dart';
+import 'package:amazonclone/features/product_details/services/product_details_services.dart';
 import 'package:amazonclone/models/product_model.dart';
 import 'package:amazonclone/provider/product_provider.dart';
 import 'package:amazonclone/provider/user_provider.dart';
@@ -19,6 +23,7 @@ class CategoryDealScreen extends StatefulWidget {
 class _CategoryDealScreenState extends State<CategoryDealScreen> {
   @override
   Widget build(BuildContext context) {
+    ProductDetailsServices productDetailsServices = ProductDetailsServices();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),
@@ -60,20 +65,14 @@ class _CategoryDealScreenState extends State<CategoryDealScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: 170,
-                  child: GridView.builder(
+                  height: 290,
+                  child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       padding: const EdgeInsets.only(left: 15),
                       itemCount:
                           Provider.of<ProductProvider>(context, listen: false)
                               .categoryProducts
                               .length,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 1,
-                        childAspectRatio: 1.5,
-                        mainAxisSpacing: 10,
-                      ),
                       itemBuilder: (context, index) {
                         final product =
                             Provider.of<ProductProvider>(context, listen: false)
@@ -82,47 +81,117 @@ class _CategoryDealScreenState extends State<CategoryDealScreen> {
                         // .watch<ProductProvider>()
                         // .categoryProducts[index];
                         return GestureDetector(
-                          onTap: () async {
-                            updateRatings(context, product);
+                            onTap: () async {
+                              updateRatings(context, product);
 
-                            await Navigator.pushNamed(
-                              context,
-                              ProductDetailsScreen.routeName,
-                              arguments: product,
-                            );
-                          },
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                height: 130,
-                                child: DecoratedBox(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.black, width: 0.5),
+                              await Navigator.pushNamed(
+                                context,
+                                ProductDetailsScreen.routeName,
+                                arguments: product,
+                              );
+                            },
+                            child: Container(
+                              width: 200,
+                              height: 265,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 3,
+                                    blurRadius: 10,
+                                    offset: const Offset(0, 3),
                                   ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10),
-                                    child: Image.network(
-                                      product.images[0],
-                                      fit: BoxFit.cover,
+                                ],
+                              ),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      child: Image.network(
+                                        product.images[0],
+                                        fit: BoxFit.fill,
+                                        height: 150,
+                                        width: 200,
+                                      ),
                                     ),
-                                  ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      product.name,
+                                      style: const TextStyle(
+                                        fontSize: 23,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      product.description,
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                      ),
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Stars(
+                                        rating: product.rating![0].rating
+                                            .toDouble()),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'Rs. ${product.price}',
+                                          style: const TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold,
+                                              color: Color.fromARGB(
+                                                  255, 208, 145, 9)),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        const SizedBox(
+                                          width: 5,
+                                        ),
+                                        GestureDetector(
+                                          onTap: () {
+                                            print('tapped');
+
+                                            showSnackbar(
+                                                context: context,
+                                                message: 'Added to cart');
+                                            Navigator.pushNamed(
+                                                context, CartScreen.routeName,
+                                                arguments:
+                                                    product.price.toString());
+                                            productDetailsServices.addToCart(
+                                                context: context,
+                                                product: product);
+                                          },
+                                          child: const Icon(
+                                            Icons.shopping_cart_outlined,
+                                            color: Colors.red,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Container(
-                                alignment: Alignment.topLeft,
-                                padding: const EdgeInsets.only(
-                                    left: 0, top: 5, right: 15),
-                                child: Text(product.name,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                      fontSize: 15,
-                                    )),
-                              )
-                            ],
-                          ),
-                        );
+                            ));
                       }),
                 )
               ],

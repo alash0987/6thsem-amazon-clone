@@ -1,3 +1,4 @@
+import 'package:amazonclone/constants/global_variable.dart';
 import 'package:amazonclone/constants/utils.dart';
 import 'package:amazonclone/features/account/widgets/single_product.dart';
 import 'package:amazonclone/provider/product_provider.dart';
@@ -52,6 +53,8 @@ class PostScreen extends StatelessWidget {
                 );
               }),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: appPrimaryColor,
+        foregroundColor: Colors.white,
         onPressed: () {
           Navigator.pushNamed(context, AddProductScreen.routeName);
         },
